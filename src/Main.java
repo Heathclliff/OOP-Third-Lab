@@ -3,6 +3,7 @@
  */
 public class Main {
     public static void main(String[] args) {
-
+        MainWork mainWork = new MainWork();
+        System.out.println(mainWork.getFileName());
     }
 }

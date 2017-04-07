@@ -30,7 +30,12 @@ public class MainWork {
 
     public String getFileName(){
         String fileName = "";
-
+        JFileChooser fileopen = new JFileChooser();
+        int ret = fileopen.showDialog(null, "Выберите файл");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            java.io.File file = new java.io.File(String.valueOf(fileopen.getSelectedFile()));
+            fileName=file.getName();
+        }
         return fileName;
     }
 
