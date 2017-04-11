@@ -1,3 +1,5 @@
+import factory.AliveOrganismCreator;
+import factory.Factory;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import organisms.AliveOrganism;
@@ -15,6 +17,8 @@ import java.io.FileOutputStream;
 public class MainWork {
 
     private  static CreatePanel createPanel;
+    private   static AliveOrganismCreator aliveOrganismCreator;
+    private  static Factory factory;
 
     public void serialize(AliveOrganism aliveOrganism){
         String fileName;
@@ -98,6 +102,7 @@ public class MainWork {
             if (createPanel !=null){
                 jFrame.remove(createPanel);
             }
+            aliveOrganismCreator = factory.getFactoryCreator(jButton.getText());
             createPanel = new CreatePanel(e1 -> {
                if (checkAllFields(createPanel)){
                    int fields[] = new int[count];
