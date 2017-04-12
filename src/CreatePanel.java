@@ -26,7 +26,7 @@ public class CreatePanel extends JPanel {
 
     public CreatePanel(ActionListener actionListener, String... labels) {
 
-        this.jButton = new JButton("Нарисовать");
+        this.jButton = new JButton("Создать");
         jButton.addActionListener(actionListener);
 
         for (int i = 0; i < labels.length; i++) {

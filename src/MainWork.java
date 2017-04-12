@@ -1,7 +1,7 @@
-import factory.AliveOrganismCreator;
-import factory.Factory;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import factory.AliveOrganismCreator;
+import factory.Factory;
 import organisms.AliveOrganism;
 
 import javax.swing.*;
@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 /**
  * Created by Валерий on 07.04.2017.
@@ -19,6 +20,8 @@ public class MainWork {
     private  static CreatePanel createPanel;
     private   static AliveOrganismCreator aliveOrganismCreator;
     private  static Factory factory;
+
+    private static java.util.List<AliveOrganism> aliveOrganismsList = new ArrayList<>();
 
     public void serialize(AliveOrganism aliveOrganism){
         String fileName;
@@ -91,7 +94,14 @@ public class MainWork {
         jFrame.revalidate();
         jFrame.repaint();
 
-        workWithButtons(jFrame,amanita,4,"x","y","z","y");
+        factory = new Factory();
+
+        workWithButtons(jFrame,amanita,4,"продолжительность жизни","дата рождения","отравлен?","длина юбки");
+        workWithButtons(jFrame,cat,3,"продолжительность жизни","дата рождения","млекопитающее?");
+        workWithButtons(jFrame,chanterelle,4,"продолжительность жизни","дата рождения","отравлен?","оттенок желтого");
+        workWithButtons(jFrame,fish,3,"продолжительность жизни","дата рождения","млекопитающее?");
+        workWithButtons(jFrame,moss,4,"продолжительность жизни","дата рождения","паразит?","хозяин");
+        workWithButtons(jFrame,rose,4,"продолжительность жизни","дата рождения","паразит?","количество шипов");
 
     }
 
@@ -104,11 +114,12 @@ public class MainWork {
             }
             aliveOrganismCreator = factory.getFactoryCreator(jButton.getText());
             createPanel = new CreatePanel(e1 -> {
-               if (checkAllFields(createPanel)){
+               if (checkAllFields(createPanel)) {
                    int fields[] = new int[count];
                    for (int i = 0; i < count; i++) {
                        fields[i] = createPanel.getTextFieldValue(i);
                    }
+                   aliveOrganismsList.add(aliveOrganismCreator.CreateOrganism(fields));
                }
             },strings);
             jFrame.add(createPanel);
