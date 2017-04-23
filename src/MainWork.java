@@ -7,10 +7,9 @@ import organisms.AliveOrganism;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Created by Валерий on 07.04.2017.
@@ -21,13 +20,17 @@ public class MainWork {
     private   static AliveOrganismCreator aliveOrganismCreator;
     private  static Factory factory;
 
+    private static Vector<String> vector;
+    private static JList<String> list;
+
     private static java.util.List<AliveOrganism> aliveOrganismsList = new ArrayList<>();
 
-    public void serialize(AliveOrganism aliveOrganism){
+    public static void serialize(AliveOrganism aliveOrganism){
         String fileName;
         fileName=getFileName();
+        System.out.println(fileName);
 
-        XStream xStream = new XStream();
+        XStream xStream = new XStream(new DomDriver());
         try {
             FileOutputStream fs = new FileOutputStream(fileName);
             xStream.toXML(aliveOrganism, fs);
@@ -39,7 +42,7 @@ public class MainWork {
         }
     }
 
-    public String getFileName(){
+    public static String getFileName(){
         String fileName = "";
         JFileChooser fileopen = new JFileChooser();
         int ret = fileopen.showDialog(null, "Выберите файл");
@@ -50,7 +53,7 @@ public class MainWork {
         return fileName;
     }
 
-    public AliveOrganism deserialize(){
+    public static AliveOrganism deserialize(){
         String fileName;
         fileName=getFileName();
 
@@ -70,7 +73,7 @@ public class MainWork {
 
     public static void initializeInterface(){
         JFrame jFrame = new JFrame("Основное окно");
-        jFrame.setSize(700,700);
+        jFrame.setSize(700,300);
         jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setBackground(Color.red);
@@ -91,8 +94,16 @@ public class MainWork {
         box.add(rose);
 
         jFrame.add(box,BorderLayout.NORTH);
-        jFrame.revalidate();
-        jFrame.repaint();
+
+        repainting(jFrame);
+
+        vector = new Vector<String>();
+        list = new JList<String>(vector);
+        //list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        jFrame.add(list,BorderLayout.SOUTH);
+
+
 
         factory = new Factory();
 
@@ -112,6 +123,7 @@ public class MainWork {
             if (createPanel !=null){
                 jFrame.remove(createPanel);
             }
+
             aliveOrganismCreator = factory.getFactoryCreator(jButton.getText());
             createPanel = new CreatePanel(e1 -> {
                if (checkAllFields(createPanel)) {
@@ -120,6 +132,13 @@ public class MainWork {
                        fields[i] = createPanel.getTextFieldValue(i);
                    }
                    aliveOrganismsList.add(aliveOrganismCreator.CreateOrganism(fields));
+                   vector.add(aliveOrganismsList.get(aliveOrganismsList.size()-1).toString());
+                   System.out.println(vector.get(vector.size()-1));
+                   list=null;
+                   list = new JList<String>(vector);
+                   jFrame.add(list,BorderLayout.SOUTH);
+                   repainting(jFrame);
+                   serialize(aliveOrganismsList.get(aliveOrganismsList.size()-1));
                }
             },strings);
             jFrame.add(createPanel);
@@ -144,5 +163,9 @@ public class MainWork {
     public static void repainting(JFrame jFrame) {
         jFrame.revalidate();
         jFrame.repaint();
+    }
+
+    public static void updateList() {
+
     }
 }
