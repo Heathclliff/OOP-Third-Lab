@@ -7,7 +7,9 @@ import organisms.AliveOrganism;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -25,7 +27,7 @@ public class MainWork {
 
     private static java.util.List<AliveOrganism> aliveOrganismsList = new ArrayList<>();
 
-    public static void serialize(AliveOrganism aliveOrganism){
+    public static void serialize(){
         String fileName;
         fileName=getFileName();
         System.out.println(fileName);
@@ -33,7 +35,9 @@ public class MainWork {
         XStream xStream = new XStream(new DomDriver());
         try {
             FileOutputStream fs = new FileOutputStream(fileName);
-            xStream.toXML(aliveOrganism, fs);
+            for (int i=0;i<aliveOrganismsList.size();i++) {
+                xStream.toXML(aliveOrganismsList.get(i), fs);
+            }
         } catch (FileNotFoundException e1) {
             JOptionPane.showMessageDialog(null,
                     "Incorrect File Name",
@@ -48,7 +52,7 @@ public class MainWork {
         int ret = fileopen.showDialog(null, "Выберите файл");
         if (ret == JFileChooser.APPROVE_OPTION) {
             java.io.File file = new java.io.File(String.valueOf(fileopen.getSelectedFile()));
-            fileName=file.getName();
+            fileName=file.getAbsolutePath();
         }
         return fileName;
     }
@@ -62,6 +66,7 @@ public class MainWork {
         try {
             FileInputStream fis = new FileInputStream(fileName);
             xStream.fromXML(fis, aliveOrganism);
+            System.out.println(aliveOrganism.getClass());
         } catch (FileNotFoundException e1) {
             JOptionPane.showMessageDialog(null,
                     "Incorrect File Name",
@@ -86,12 +91,23 @@ public class MainWork {
         JButton fish = new JButton("Fish");
         JButton moss = new JButton("Moss");
         JButton rose = new JButton("Rose");
+        JButton serial = new JButton("Serialize");
+        JButton deserial = new JButton("Deserialize");
         box.add(amanita);
         box.add(cat);
         box.add(chanterelle);
         box.add(fish);
         box.add(moss);
         box.add(rose);
+        box.add(serial);
+        box.add(deserial);
+
+        serial.addActionListener( (ActionEvent e) -> {
+            serialize();
+        });
+        deserial.addActionListener( (ActionEvent e) -> {
+            deserialize();
+        });
 
         jFrame.add(box,BorderLayout.NORTH);
 
@@ -99,7 +115,6 @@ public class MainWork {
 
         vector = new Vector<String>();
         list = new JList<String>(vector);
-        //list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         jFrame.add(list,BorderLayout.SOUTH);
 
@@ -138,7 +153,6 @@ public class MainWork {
                    list = new JList<String>(vector);
                    jFrame.add(list,BorderLayout.SOUTH);
                    repainting(jFrame);
-                   serialize(aliveOrganismsList.get(aliveOrganismsList.size()-1));
                }
             },strings);
             jFrame.add(createPanel);
@@ -163,9 +177,5 @@ public class MainWork {
     public static void repainting(JFrame jFrame) {
         jFrame.revalidate();
         jFrame.repaint();
-    }
-
-    public static void updateList() {
-
     }
 }
