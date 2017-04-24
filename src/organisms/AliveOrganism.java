@@ -3,14 +3,24 @@ package organisms;
 /**
  * Created by Валерий on 06.04.2017.
  */
-public abstract class AliveOrganism {
+public class AliveOrganism {
 
     private int lifeExpectancy;
     private String dateOfBirds;
+    private  int countOfFields;
 
-    public AliveOrganism(int lifeExpectancy, String dateOfBirds) {
+    public int getCountOfFields() {
+        return countOfFields;
+    }
+
+    public void setCountOfFields(int countOfFields) {
+        this.countOfFields = countOfFields;
+    }
+
+    public AliveOrganism(int lifeExpectancy, String dateOfBirds,int countOfFields) {
         lifeExpectancy = lifeExpectancy;
         dateOfBirds = dateOfBirds;
+        countOfFields = countOfFields;
     }
 
     public int getLifeExpectancy() {

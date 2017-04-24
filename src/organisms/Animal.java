@@ -5,8 +5,8 @@ package organisms;
  */
 public abstract class Animal extends AliveOrganism {
 
-    public Animal(int lifeExpectancy, String dateOfBirds, boolean isMammal) {
-        super(lifeExpectancy, dateOfBirds);
+    public Animal(int lifeExpectancy, String dateOfBirds,int countOfFields, boolean isMammal) {
+        super(lifeExpectancy, dateOfBirds,countOfFields);
         isMammal = isMammal;
     }
 

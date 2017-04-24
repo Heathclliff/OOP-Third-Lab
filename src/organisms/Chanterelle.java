@@ -4,8 +4,8 @@ package organisms;
  * Created by Валерий on 07.04.2017.
  */
 public class Chanterelle extends Mushroom {
-    public Chanterelle(int lifeExpectancy, String dateOfBirds, boolean isPoisonous, int shadeOfYellow) {
-        super(lifeExpectancy, dateOfBirds, isPoisonous);
+    public Chanterelle(int lifeExpectancy, String dateOfBirds,int countOfFields, boolean isPoisonous, int shadeOfYellow) {
+        super(lifeExpectancy, dateOfBirds,countOfFields, isPoisonous);
         this.shadeOfYellow = shadeOfYellow;
     }
 

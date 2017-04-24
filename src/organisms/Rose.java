@@ -5,8 +5,8 @@ package organisms;
  */
 public class Rose extends Plant {
 
-    public Rose(int lifeExpectancy, String dateOfBirds, boolean isParasite, int numberOfSpikes) {
-        super(lifeExpectancy, dateOfBirds, isParasite);
+    public Rose(int lifeExpectancy, String dateOfBirds,int countOfFileds, boolean isParasite, int numberOfSpikes) {
+        super(lifeExpectancy, dateOfBirds,countOfFileds, isParasite);
         this.numberOfSpikes = numberOfSpikes;
     }
 

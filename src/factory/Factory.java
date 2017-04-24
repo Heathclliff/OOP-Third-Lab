@@ -22,7 +22,7 @@ public class Factory {
             public AliveOrganism CreateOrganism(int[] numbers) {
                 boolean bool;
                     bool = numbers[2]%2==1;
-                return new Amanita(numbers[0],String.valueOf(numbers[1]),bool,numbers[3]);
+                return new Amanita(numbers[0],String.valueOf(numbers[1]),4,bool,numbers[3]);
             }
         });
         factoryCreatorMap.put("Cat", new AliveOrganismCreator() {
@@ -30,7 +30,7 @@ public class Factory {
             public AliveOrganism CreateOrganism(int[] numbers) {
                 boolean bool;
                 bool = numbers[2]%2==1;
-                return new Cat(numbers[0],String.valueOf(numbers[1]),bool);
+                return new Cat(numbers[0],String.valueOf(numbers[1]),3,bool);
             }
         });
         factoryCreatorMap.put("Chanterelle", new AliveOrganismCreator() {
@@ -38,7 +38,7 @@ public class Factory {
             public AliveOrganism CreateOrganism(int[] numbers) {
                 boolean bool;
                 bool = numbers[2]%2==1;
-                return new Chanterelle(numbers[0],String.valueOf(numbers[1]),bool,numbers[3]);
+                return new Chanterelle(numbers[0],String.valueOf(numbers[1]),4,bool,numbers[3]);
             }
         });
         factoryCreatorMap.put("Fish", new AliveOrganismCreator() {
@@ -46,7 +46,7 @@ public class Factory {
             public AliveOrganism CreateOrganism(int[] numbers) {
                 boolean bool;
                 bool = numbers[2]%2==1;
-                return new Fish(numbers[0],String.valueOf(numbers[1]),bool);
+                return new Fish(numbers[0],String.valueOf(numbers[1]),4,bool);
             }
         });
         factoryCreatorMap.put("Moss", new AliveOrganismCreator() {
@@ -54,7 +54,7 @@ public class Factory {
             public AliveOrganism CreateOrganism(int[] numbers) {
                 boolean bool;
                 bool = numbers[2]%2==1;
-                return new Moss(numbers[0],String.valueOf(numbers[1]),bool,String.valueOf(numbers[3]));
+                return new Moss(numbers[0],String.valueOf(numbers[1]),4,bool,String.valueOf(numbers[3]));
             }
         });
         factoryCreatorMap.put("Rose", new AliveOrganismCreator() {
@@ -62,7 +62,7 @@ public class Factory {
             public AliveOrganism CreateOrganism(int[] numbers) {
                 boolean bool;
                 bool = numbers[2]%2==1;
-                return new Rose(numbers[0],String.valueOf(numbers[1]),bool,numbers[3]);
+                return new Rose(numbers[0],String.valueOf(numbers[1]),4,bool,numbers[3]);
             }
         });
         }

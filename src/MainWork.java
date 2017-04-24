@@ -27,6 +27,8 @@ public class MainWork {
     private static Vector<String> vector;
     private static JList<String> list;
 
+    private  static  JFrame jFrame;
+
     private static java.util.List<AliveOrganism> aliveOrganismsList = new ArrayList<>();
 
     public static void serialize(){
@@ -79,7 +81,7 @@ public class MainWork {
     }
 
     public static void initializeInterface(){
-        JFrame jFrame = new JFrame("Основное окно");
+        jFrame = new JFrame("Основное окно");
         jFrame.setSize(700,300);
         jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
@@ -113,7 +115,7 @@ public class MainWork {
 
         jFrame.add(box,BorderLayout.NORTH);
 
-        repainting(jFrame);
+        repainting();
 
         vector = new Vector<String>();
         list = new JList<String>(vector);
@@ -126,23 +128,22 @@ public class MainWork {
 
         factory = new Factory();
 
-        workWithButtons(jFrame,amanita,4,"продолжительность жизни","дата рождения","отравлен?","длина юбки");
-        workWithButtons(jFrame,cat,3,"продолжительность жизни","дата рождения","млекопитающее?");
-        workWithButtons(jFrame,chanterelle,4,"продолжительность жизни","дата рождения","отравлен?","оттенок желтого");
-        workWithButtons(jFrame,fish,3,"продолжительность жизни","дата рождения","млекопитающее?");
-        workWithButtons(jFrame,moss,4,"продолжительность жизни","дата рождения","паразит?","хозяин");
-        workWithButtons(jFrame,rose,4,"продолжительность жизни","дата рождения","паразит?","количество шипов");
+        workWithButtons(amanita,4,"продолжительность жизни","дата рождения","отравлен?","длина юбки");
+        workWithButtons(cat,3,"продолжительность жизни","дата рождения","млекопитающее?");
+        workWithButtons(chanterelle,4,"продолжительность жизни","дата рождения","отравлен?","оттенок желтого");
+        workWithButtons(fish,3,"продолжительность жизни","дата рождения","млекопитающее?");
+        workWithButtons(moss,4,"продолжительность жизни","дата рождения","паразит?","хозяин");
+        workWithButtons(rose,4,"продолжительность жизни","дата рождения","паразит?","количество шипов");
 
     }
 
 
 
-    public static void workWithButtons(JFrame jFrame, JButton jButton, int count, String... strings){
+    public static void workWithButtons(JButton jButton, int count, String... strings){
         jButton.addActionListener((ActionEvent e) -> {
             if (createPanel !=null){
                 jFrame.remove(createPanel);
             }
-
             aliveOrganismCreator = factory.getFactoryCreator(jButton.getText());
             createPanel = new CreatePanel(e1 -> {
                if (checkAllFields(createPanel)) {
@@ -157,11 +158,11 @@ public class MainWork {
                    list = new JList<String>(vector);
                    selectionlist();
                    jFrame.add(list,BorderLayout.SOUTH);
-                   repainting(jFrame);
+                   repainting();
                }
             },strings);
             jFrame.add(createPanel);
-            repainting(jFrame);
+            repainting();
         });
 
 
@@ -179,7 +180,7 @@ public class MainWork {
         }
     }
 
-    public static void repainting(JFrame jFrame) {
+    public static void repainting() {
         jFrame.revalidate();
         jFrame.repaint();
     }
@@ -189,8 +190,30 @@ public class MainWork {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int index = list.locationToIndex(e.getPoint());
-                System.out.println(index);
+                JButton jButton = new JButton(getClassNameOfItem(index));
+                workWithButtons(jButton,aliveOrganismsList.get(index).getCountOfFields(),"продолжительность жизни","дата рождения","млекопитающее?");
+                jButton.doClick();
+                deleteBtnListener(index);
+                repainting();
             }
         });
+    }
+
+    public static void deleteBtnListener(int index){
+        JButton deletebtn = new JButton("Delete");
+        jFrame.add(deletebtn,BorderLayout.LINE_END);
+        deletebtn.addActionListener((ActionEvent e) -> {
+                vector.remove(index);
+                aliveOrganismsList.remove(index);
+            repainting();
+            });
+    }
+
+    public static String getClassNameOfItem(int index){
+        String className;
+        className=aliveOrganismsList.get(index).getClass().toString();
+        int posDot=className.indexOf(".");
+        className=className.substring(posDot+1,className.length());
+        return className;
     }
 }

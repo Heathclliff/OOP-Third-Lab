@@ -4,8 +4,8 @@ package organisms;
  * Created by Валерий on 07.04.2017.
  */
 public abstract class Plant extends  AliveOrganism {
-    public Plant(int lifeExpectancy, String dateOfBirds, boolean isParasite) {
-        super(lifeExpectancy, dateOfBirds);
+    public Plant(int lifeExpectancy, String dateOfBirds,int countOfFields, boolean isParasite) {
+        super(lifeExpectancy, dateOfBirds,countOfFields);
         isParasite = isParasite;
     }
 

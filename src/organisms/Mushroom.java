@@ -5,8 +5,8 @@ package organisms;
  */
 public abstract class Mushroom extends AliveOrganism {
 
-    public Mushroom(int lifeExpectancy, String dateOfBirds, boolean isPoisonous) {
-        super(lifeExpectancy, dateOfBirds);
+    public Mushroom(int lifeExpectancy, String dateOfBirds,int countOfFields, boolean isPoisonous) {
+        super(lifeExpectancy, dateOfBirds,countOfFields);
         this.isPoisonous = isPoisonous;
     }
 
