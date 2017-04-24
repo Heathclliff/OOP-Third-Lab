@@ -7,6 +7,8 @@ import organisms.AliveOrganism;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -116,6 +118,8 @@ public class MainWork {
         vector = new Vector<String>();
         list = new JList<String>(vector);
 
+        selectionlist();
+
         jFrame.add(list,BorderLayout.SOUTH);
 
 
@@ -151,6 +155,7 @@ public class MainWork {
                    System.out.println(vector.get(vector.size()-1));
                    list=null;
                    list = new JList<String>(vector);
+                   selectionlist();
                    jFrame.add(list,BorderLayout.SOUTH);
                    repainting(jFrame);
                }
@@ -177,5 +182,15 @@ public class MainWork {
     public static void repainting(JFrame jFrame) {
         jFrame.revalidate();
         jFrame.repaint();
+    }
+
+    public static void selectionlist(){
+        list.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int index = list.locationToIndex(e.getPoint());
+                System.out.println(index);
+            }
+        });
     }
 }
