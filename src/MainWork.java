@@ -61,10 +61,14 @@ public class MainWork {
         String fileName;
         fileName=getFileName();
         XStream xStream = new XStream(new DomDriver());
+        aliveOrganismsList=new ArrayList<>();
         try {
             FileInputStream fis = new FileInputStream(fileName);
-            xStream.fromXML(fis, aliveOrganismsList);
-            System.out.println(aliveOrganismsList.size());
+            aliveOrganismsList=(ArrayList)xStream.fromXML(fis, aliveOrganismsList);
+            for (int i=0;i<aliveOrganismsList.size();i++){
+                vector.add(aliveOrganismsList.get(i).toString());
+            }
+            reloadList();
         } catch (FileNotFoundException e1) {
             JOptionPane.showMessageDialog(null,
                     "Incorrect File Name",
@@ -148,12 +152,7 @@ public class MainWork {
                    }
                    aliveOrganismsList.add(aliveOrganismCreator.CreateOrganism(fields));
                    vector.add(aliveOrganismsList.get(aliveOrganismsList.size()-1).toString());
-                   System.out.println(vector.get(vector.size()-1));
-                   list=null;
-                   list = new JList<String>(vector);
-                   selectionlist();
-                   jFrame.add(list,BorderLayout.SOUTH);
-                   repainting();
+                   reloadList();
                }
             },field,strings);
             jFrame.add(createPanel);
@@ -161,6 +160,14 @@ public class MainWork {
         });
 
 
+    }
+
+    private static void reloadList() {
+        list=null;
+        list = new JList<String>(vector);
+        selectionlist();
+        jFrame.add(list,BorderLayout.SOUTH);
+        repainting();
     }
 
     public static boolean checkAllFields(CreatePanel createPanel) {
