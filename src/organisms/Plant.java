@@ -6,7 +6,7 @@ package organisms;
 public abstract class Plant extends  AliveOrganism {
     public Plant(int lifeExpectancy, String dateOfBirds,int countOfFields, int isParasite) {
         super(lifeExpectancy, dateOfBirds,countOfFields);
-        isParasite = isParasite;
+        this.setParasite(isParasite);
     }
 
     private int isParasite;
@@ -16,6 +16,6 @@ public abstract class Plant extends  AliveOrganism {
     }
 
     public void setParasite(int parasite) {
-        isParasite = parasite;
+        this.isParasite = parasite;
     }
 }

@@ -6,7 +6,7 @@ package organisms;
 public class Amanita extends Mushroom {
     public Amanita(int lifeExpectancy, String dateOfBirds,int countOfFields,int isPoisonous, int lengthOfSkirt) {
         super(lifeExpectancy, dateOfBirds,countOfFields, isPoisonous);
-        this.lengthOfSkirt = lengthOfSkirt;
+        this.setLengthOfSkirt(lengthOfSkirt);
     }
 
     private int lengthOfSkirt;

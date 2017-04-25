@@ -34,14 +34,10 @@ public class MainWork {
     public static void serialize(){
         String fileName;
         fileName=getFileName();
-        System.out.println(fileName);
-
         XStream xStream = new XStream(new DomDriver());
         try {
             FileOutputStream fs = new FileOutputStream(fileName);
-            for (int i=0;i<aliveOrganismsList.size();i++) {
-                xStream.toXML(aliveOrganismsList.get(i), fs);
-            }
+            xStream.toXML(aliveOrganismsList,fs);
         } catch (FileNotFoundException e1) {
             JOptionPane.showMessageDialog(null,
                     "Incorrect File Name",
@@ -61,23 +57,20 @@ public class MainWork {
         return fileName;
     }
 
-    public static AliveOrganism deserialize(){
+    public static void deserialize(){
         String fileName;
         fileName=getFileName();
-
-        AliveOrganism aliveOrganism = null;
         XStream xStream = new XStream(new DomDriver());
         try {
             FileInputStream fis = new FileInputStream(fileName);
-            xStream.fromXML(fis, aliveOrganism);
-            System.out.println(aliveOrganism.getClass());
+            xStream.fromXML(fis, aliveOrganismsList);
+            System.out.println(aliveOrganismsList.size());
         } catch (FileNotFoundException e1) {
             JOptionPane.showMessageDialog(null,
                     "Incorrect File Name",
                     "Please enter correct file name",
                     JOptionPane.ERROR_MESSAGE);
         }
-        return aliveOrganism;
     }
 
     public static void initializeInterface(){

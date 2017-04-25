@@ -7,7 +7,7 @@ public class Rose extends Plant {
 
     public Rose(int lifeExpectancy, String dateOfBirds,int countOfFileds, int isParasite, int numberOfSpikes) {
         super(lifeExpectancy, dateOfBirds,countOfFileds, isParasite);
-        this.numberOfSpikes = numberOfSpikes;
+        this.setNumberOfSpikes(numberOfSpikes);
     }
 
     private int numberOfSpikes;

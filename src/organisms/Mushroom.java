@@ -7,7 +7,7 @@ public abstract class Mushroom extends AliveOrganism {
 
     public Mushroom(int lifeExpectancy, String dateOfBirds,int countOfFields, int isPoisonous) {
         super(lifeExpectancy, dateOfBirds,countOfFields);
-        this.isPoisonous = isPoisonous;
+        this.setPoisonous(isPoisonous);
     }
 
     private int isPoisonous;

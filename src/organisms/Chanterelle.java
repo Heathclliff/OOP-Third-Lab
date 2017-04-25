@@ -6,7 +6,7 @@ package organisms;
 public class Chanterelle extends Mushroom {
     public Chanterelle(int lifeExpectancy, String dateOfBirds,int countOfFields, int isPoisonous, int shadeOfYellow) {
         super(lifeExpectancy, dateOfBirds,countOfFields, isPoisonous);
-        this.shadeOfYellow = shadeOfYellow;
+        this.setShadeOfYellow(shadeOfYellow);
     }
 
     private int shadeOfYellow;
