@@ -5,18 +5,18 @@ package organisms;
  */
 public abstract class Animal extends AliveOrganism {
 
-    public Animal(int lifeExpectancy, String dateOfBirds,int countOfFields, boolean isMammal) {
+    public Animal(int lifeExpectancy, String dateOfBirds,int countOfFields, int isMammal) {
         super(lifeExpectancy, dateOfBirds,countOfFields);
-        isMammal = isMammal;
+        this.setMammal(isMammal);
     }
 
-    private  boolean isMammal;
+    private  int isMammal;
 
-    public boolean isMammal() {
+    public int isMammal() {
         return isMammal;
     }
 
-    public void setMammal(boolean mammal) {
-        isMammal = mammal;
+    public void setMammal(int mammal) {
+        this.isMammal = mammal;
     }
 }

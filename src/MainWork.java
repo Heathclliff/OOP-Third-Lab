@@ -128,18 +128,20 @@ public class MainWork {
 
         factory = new Factory();
 
-        workWithButtons(amanita,4,"продолжительность жизни","дата рождения","отравлен?","длина юбки");
-        workWithButtons(cat,3,"продолжительность жизни","дата рождения","млекопитающее?");
-        workWithButtons(chanterelle,4,"продолжительность жизни","дата рождения","отравлен?","оттенок желтого");
-        workWithButtons(fish,3,"продолжительность жизни","дата рождения","млекопитающее?");
-        workWithButtons(moss,4,"продолжительность жизни","дата рождения","паразит?","хозяин");
-        workWithButtons(rose,4,"продолжительность жизни","дата рождения","паразит?","количество шипов");
+        String[] fields={"0","0","0","0","0"};
+
+        workWithButtons(amanita,4,fields,"продолжительность жизни","дата рождения","отравлен?","длина юбки");
+        workWithButtons(cat,3,fields,"продолжительность жизни","дата рождения","млекопитающее?");
+        workWithButtons(chanterelle,4,fields,"продолжительность жизни","дата рождения","отравлен?","оттенок желтого");
+        workWithButtons(fish,3,fields,"продолжительность жизни","дата рождения","млекопитающее?");
+        workWithButtons(moss,4,fields,"продолжительность жизни","дата рождения","паразит?","хозяин");
+        workWithButtons(rose,4,fields,"продолжительность жизни","дата рождения","паразит?","количество шипов");
 
     }
 
 
 
-    public static void workWithButtons(JButton jButton, int count, String... strings){
+    public static void workWithButtons(JButton jButton, int count,String[] field, String... strings){
         jButton.addActionListener((ActionEvent e) -> {
             if (createPanel !=null){
                 jFrame.remove(createPanel);
@@ -160,7 +162,7 @@ public class MainWork {
                    jFrame.add(list,BorderLayout.SOUTH);
                    repainting();
                }
-            },strings);
+            },field,strings);
             jFrame.add(createPanel);
             repainting();
         });
@@ -191,12 +193,18 @@ public class MainWork {
             public void mouseClicked(MouseEvent e) {
                 int index = list.locationToIndex(e.getPoint());
                 JButton jButton = new JButton(getClassNameOfItem(index));
-                workWithButtons(jButton,aliveOrganismsList.get(index).getCountOfFields(),"продолжительность жизни","дата рождения","млекопитающее?");
+                String [] fields=getFieldsFromList(index);
+                workWithButtons(jButton,aliveOrganismsList.get(index).getCountOfFields(),fields,aliveOrganismsList.get(index).getTextFields());
                 jButton.doClick();
                 deleteBtnListener(index);
                 repainting();
             }
         });
+    }
+
+    private static String[] getFieldsFromList(int index) {
+        String[] fields=factory.getFactoryFields(getClassNameOfItem(index),aliveOrganismsList.get(index));
+        return fields;
     }
 
     public static void deleteBtnListener(int index){

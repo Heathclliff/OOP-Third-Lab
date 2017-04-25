@@ -5,7 +5,7 @@ package organisms;
  */
 public class Rose extends Plant {
 
-    public Rose(int lifeExpectancy, String dateOfBirds,int countOfFileds, boolean isParasite, int numberOfSpikes) {
+    public Rose(int lifeExpectancy, String dateOfBirds,int countOfFileds, int isParasite, int numberOfSpikes) {
         super(lifeExpectancy, dateOfBirds,countOfFileds, isParasite);
         this.numberOfSpikes = numberOfSpikes;
     }
@@ -18,6 +18,12 @@ public class Rose extends Plant {
 
     public void setNumberOfSpikes(int numberOfSpikes) {
         this.numberOfSpikes = numberOfSpikes;
+    }
+
+    @Override
+    public String[] getTextFields(){
+        String[] textfields={"продолжительность жизни","дата рождения","паразит?","количество шипов"};
+        return textfields;
     }
 
 }

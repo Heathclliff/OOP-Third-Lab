@@ -3,7 +3,7 @@ package organisms;
 /**
  * Created by Валерий on 06.04.2017.
  */
-public class AliveOrganism {
+public abstract class AliveOrganism {
 
     private int lifeExpectancy;
     private String dateOfBirds;
@@ -18,9 +18,9 @@ public class AliveOrganism {
     }
 
     public AliveOrganism(int lifeExpectancy, String dateOfBirds,int countOfFields) {
-        lifeExpectancy = lifeExpectancy;
-        dateOfBirds = dateOfBirds;
-        countOfFields = countOfFields;
+        this.setLifeExpectancy(lifeExpectancy);
+        this.setDateOfBirds(dateOfBirds);
+        this.setCountOfFields(countOfFields);
     }
 
     public int getLifeExpectancy() {
@@ -28,7 +28,7 @@ public class AliveOrganism {
     }
 
     public void setLifeExpectancy(int lifeExpectancy) {
-        lifeExpectancy = lifeExpectancy;
+        this.lifeExpectancy = lifeExpectancy;
     }
 
     public String getDateOfBirds() {
@@ -36,11 +36,13 @@ public class AliveOrganism {
     }
 
     public void setDateOfBirds(String dateOfBirds) {
-        dateOfBirds = dateOfBirds;
+        this.dateOfBirds = dateOfBirds;
     }
 
     public void grow(){
         System.out.println("I'm growing");
     }
+
+    public abstract String[] getTextFields();
 
 }

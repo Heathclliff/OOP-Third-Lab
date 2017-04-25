@@ -24,14 +24,14 @@ public class CreatePanel extends JPanel {
     private List<JTextField> jTextFieldList = new ArrayList<>();
 
 
-    public CreatePanel(ActionListener actionListener, String... labels) {
+    public CreatePanel(ActionListener actionListener,String[] fields, String[] labels) {
 
         this.jButton = new JButton("Создать");
         jButton.addActionListener(actionListener);
 
         for (int i = 0; i < labels.length; i++) {
 
-            jTextFieldList.add(getTextField(labels[i]));
+            jTextFieldList.add(getTextField(fields[i],labels[i]));
         }
 
         this.add(jButton);
@@ -44,9 +44,9 @@ public class CreatePanel extends JPanel {
     }
 
 
-    private JTextField getTextField(String label) {
+    private JTextField getTextField(String text,String label) {
 
-        JTextField jTextField = new JTextField(16);
+        JTextField jTextField = new JTextField(String.valueOf(text),16);
         jTextField.addKeyListener(keyAdapter);
 
         JLabel jLabel = new JLabel(label);
