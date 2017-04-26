@@ -16,7 +16,7 @@ public class Rose extends Plant {
         return numberOfSpikes;
     }
 
-    public void setNumberOfSpikes(int numberOfSpikes) {
+    private void setNumberOfSpikes(int numberOfSpikes) {
         this.numberOfSpikes = numberOfSpikes;
     }
 

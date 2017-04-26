@@ -15,7 +15,7 @@ public class Chanterelle extends Mushroom {
         return shadeOfYellow;
     }
 
-    public void setShadeOfYellow(int shadeOfYellow) {
+    private void setShadeOfYellow(int shadeOfYellow) {
         this.shadeOfYellow = shadeOfYellow;
     }
 

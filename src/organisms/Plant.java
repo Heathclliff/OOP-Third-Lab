@@ -15,7 +15,7 @@ public abstract class Plant extends  AliveOrganism {
         return isParasite;
     }
 
-    public void setParasite(int parasite) {
+    private void setParasite(int parasite) {
         this.isParasite = parasite;
     }
 }

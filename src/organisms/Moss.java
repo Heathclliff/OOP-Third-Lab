@@ -15,7 +15,7 @@ public class Moss extends Plant {
         return master;
     }
 
-    public void setMaster(String master) {
+    private void setMaster(String master) {
         this.master = master;
     }
 

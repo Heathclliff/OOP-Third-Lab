@@ -1,5 +1,3 @@
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 import factory.AliveOrganismCreator;
 import factory.Factory;
 import organisms.AliveOrganism;
@@ -9,9 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -21,60 +16,32 @@ import java.util.Vector;
 public class MainWork {
 
     private  static CreatePanel createPanel;
-    private   static AliveOrganismCreator aliveOrganismCreator;
+    private  static AliveOrganismCreator aliveOrganismCreator;
     private  static Factory factory;
 
     private static Vector<String> vector;
     private static JList<String> list;
 
     private  static  JFrame jFrame;
-
     private static java.util.List<AliveOrganism> aliveOrganismsList = new ArrayList<>();
 
     public static void serialize(){
-        String fileName;
-        fileName=getFileName();
-        XStream xStream = new XStream(new DomDriver());
-        try {
-            FileOutputStream fs = new FileOutputStream(fileName);
-            xStream.toXML(aliveOrganismsList,fs);
-        } catch (FileNotFoundException e1) {
-            JOptionPane.showMessageDialog(null,
-                    "Incorrect File Name",
-                    "Please enter correct file name",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public static String getFileName(){
-        String fileName = "";
-        JFileChooser fileopen = new JFileChooser();
-        int ret = fileopen.showDialog(null, "Выберите файл");
-        if (ret == JFileChooser.APPROVE_OPTION) {
-            java.io.File file = new java.io.File(String.valueOf(fileopen.getSelectedFile()));
-            fileName=file.getAbsolutePath();
-        }
-        return fileName;
+        Serializer serializer = new Serializer(aliveOrganismsList);
+        serializer.serialize();
+        serializer=null;
     }
 
     public static void deserialize(){
-        String fileName;
-        fileName=getFileName();
-        XStream xStream = new XStream(new DomDriver());
-        aliveOrganismsList=new ArrayList<>();
-        try {
-            FileInputStream fis = new FileInputStream(fileName);
-            aliveOrganismsList=(ArrayList)xStream.fromXML(fis, aliveOrganismsList);
-            for (int i=0;i<aliveOrganismsList.size();i++){
-                vector.add(aliveOrganismsList.get(i).toString());
-            }
-            reloadList();
-        } catch (FileNotFoundException e1) {
-            JOptionPane.showMessageDialog(null,
-                    "Incorrect File Name",
-                    "Please enter correct file name",
-                    JOptionPane.ERROR_MESSAGE);
+        Serializer serializer = new Serializer(aliveOrganismsList);
+        serializer.deserialize();
+        aliveOrganismsList=serializer.getAliveOrganismsList();
+        serializer=null;
+        vector = new Vector<String>();
+        list = new JList<String>(vector);
+        for (int i=0;i<aliveOrganismsList.size();i++){
+            vector.add(aliveOrganismsList.get(i).toString());
         }
+        reloadList();
     }
 
     public static void initializeInterface(){
@@ -121,8 +88,6 @@ public class MainWork {
 
         jFrame.add(list,BorderLayout.SOUTH);
 
-
-
         factory = new Factory();
 
         String[] fields={"0","0","0","0","0"};
@@ -133,7 +98,6 @@ public class MainWork {
         workWithButtons(fish,3,fields,"продолжительность жизни","дата рождения","млекопитающее?");
         workWithButtons(moss,4,fields,"продолжительность жизни","дата рождения","паразит?","хозяин");
         workWithButtons(rose,4,fields,"продолжительность жизни","дата рождения","паразит?","количество шипов");
-
     }
 
 
@@ -158,8 +122,6 @@ public class MainWork {
             jFrame.add(createPanel);
             repainting();
         });
-
-
     }
 
     private static void reloadList() {

@@ -16,7 +16,7 @@ public abstract class Animal extends AliveOrganism {
         return isMammal;
     }
 
-    public void setMammal(int mammal) {
+    private void setMammal(int mammal) {
         this.isMammal = mammal;
     }
 }

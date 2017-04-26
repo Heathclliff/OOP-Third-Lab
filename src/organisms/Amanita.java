@@ -15,7 +15,7 @@ public class Amanita extends Mushroom {
         return lengthOfSkirt;
     }
 
-    public void setLengthOfSkirt(int lengthOfSkirt) {
+    private void setLengthOfSkirt(int lengthOfSkirt) {
         this.lengthOfSkirt = lengthOfSkirt;
     }
 

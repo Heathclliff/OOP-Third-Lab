@@ -13,7 +13,7 @@ public abstract class AliveOrganism {
         return countOfFields;
     }
 
-    public void setCountOfFields(int countOfFields) {
+    private void setCountOfFields(int countOfFields) {
         this.countOfFields = countOfFields;
     }
 

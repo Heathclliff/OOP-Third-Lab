@@ -4,19 +4,18 @@ package organisms;
  * Created by Валерий on 07.04.2017.
  */
 public abstract class Mushroom extends AliveOrganism {
+    private int isPoisonous;
 
     public Mushroom(int lifeExpectancy, String dateOfBirds,int countOfFields, int isPoisonous) {
         super(lifeExpectancy, dateOfBirds,countOfFields);
         this.setPoisonous(isPoisonous);
     }
 
-    private int isPoisonous;
-
-    public int isPoisonous() {
+     public int isPoisonous() {
         return isPoisonous;
     }
 
-    public void setPoisonous(int poisonous) {
+    private void setPoisonous(int poisonous) {
         this.isPoisonous = poisonous;
     }
 }
