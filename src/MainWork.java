@@ -70,6 +70,12 @@ public class MainWork {
         box.add(serial);
         box.add(deserial);
 
+       /* UploadPlugin uploadPlugin = new UploadPlugin();
+        uploadPlugin.downloadPlugin();*/
+
+       ModuleEngine moduleEngine = new ModuleEngine();
+       moduleEngine.work();
+
         serial.addActionListener( (ActionEvent e) -> {
             serialize();
         });

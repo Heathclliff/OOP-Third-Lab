@@ -36,10 +36,7 @@ public class Serializer {
             FileOutputStream fs = new FileOutputStream(fileName);
             xStream.toXML(this.getAliveOrganismsList(),fs);
         } catch (FileNotFoundException e1) {
-            JOptionPane.showMessageDialog(null,
-                    "Incorrect File Name",
-                    "Please enter correct file name",
-                    JOptionPane.ERROR_MESSAGE);
+            e1.printStackTrace();
         }
     }
 
