@@ -6,22 +6,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b12701d8-b5ea-43c9-ad73-b873c44926f8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/UploadPlugin.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/Wolf.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/xstream-1.3.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Pluginloader/ModuleEngine.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Pluginloader/ModuleLoader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MainWork.java" afterPath="$PROJECT_DIR$/src/MainWork.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/factory/Factory.java" afterPath="$PROJECT_DIR$/src/factory/Factory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/organisms/AliveOrganism.java" afterPath="$PROJECT_DIR$/src/organisms/AliveOrganism.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/organisms/Amanita.java" afterPath="$PROJECT_DIR$/src/organisms/Amanita.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/organisms/Animal.java" afterPath="$PROJECT_DIR$/src/organisms/Animal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/organisms/Cat.java" afterPath="$PROJECT_DIR$/src/organisms/Cat.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/organisms/Chanterelle.java" afterPath="$PROJECT_DIR$/src/organisms/Chanterelle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/organisms/Fish.java" afterPath="$PROJECT_DIR$/src/organisms/Fish.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/organisms/Moss.java" afterPath="$PROJECT_DIR$/src/organisms/Moss.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/organisms/Mushroom.java" afterPath="$PROJECT_DIR$/src/organisms/Mushroom.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/organisms/Plant.java" afterPath="$PROJECT_DIR$/src/organisms/Plant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/organisms/Rose.java" afterPath="$PROJECT_DIR$/src/organisms/Rose.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -71,8 +60,8 @@
       <file leaf-file-name="ModuleEngine.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Pluginloader/ModuleEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="360">
+              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -793,7 +782,7 @@
       <workItem from="1492952399833" duration="312000" />
       <workItem from="1494664641362" duration="82000" />
       <workItem from="1494664926832" duration="11204000" />
-      <workItem from="1494871428577" duration="810000" />
+      <workItem from="1494871428577" duration="974000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1491569581834</created>
@@ -900,11 +889,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494700577374</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Added loader with some Bug">
+      <created>1494872275654</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1494872275655</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12894000" />
+    <option name="totallyTimeSpent" value="13058000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
@@ -964,7 +960,8 @@
     <MESSAGE value="all done" />
     <MESSAGE value="refactoring" />
     <MESSAGE value="Added pluginloader" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added pluginloader" />
+    <MESSAGE value="Added loader with some Bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added loader with some Bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1113,6 +1110,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="67">
           <caret line="6" column="56" lean-forward="false" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
+          <folding>
+            <element signature="e#453#454#0" expanded="true" />
+            <element signature="e#495#496#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1120,6 +1121,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
           <caret line="132" column="70" lean-forward="true" selection-start-line="132" selection-start-column="70" selection-end-line="132" selection-end-column="70" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1127,6 +1129,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="5" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1134,6 +1137,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="101">
           <caret line="11" column="32" lean-forward="false" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+          <folding>
+            <element signature="e#450#451#0" expanded="true" />
+            <element signature="e#486#487#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1141,6 +1148,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="8" lean-forward="false" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+          <folding>
+            <element signature="e#170#171#0" expanded="true" />
+            <element signature="e#230#231#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1148,6 +1159,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="62" lean-forward="false" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
+          <folding>
+            <element signature="e#511#512#0" expanded="true" />
+            <element signature="e#561#562#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1155,6 +1170,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+          <folding>
+            <element signature="e#168#169#0" expanded="true" />
+            <element signature="e#228#229#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1272,8 +1291,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Pluginloader/ModuleEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
