@@ -21,7 +21,7 @@ public class Factory {
         factoryCreatorMap = new HashMap<String,AliveOrganismCreator>();
         factoryFieldsMap = new HashMap<String,AliveOrganismFields>();
 
-        factoryFieldsMap.put("Amanita", new AliveOrganismFields() {
+        factoryFieldsMap.put("organisms.Amanita", new AliveOrganismFields() {
                     @Override
                     public String[] getFields(AliveOrganism aliveOrganism) {
                         String[] fields={"","","",""};
@@ -34,7 +34,7 @@ public class Factory {
                     }
                 });
 
-        factoryFieldsMap.put("Cat", new AliveOrganismFields() {
+        factoryFieldsMap.put("organisms.Cat", new AliveOrganismFields() {
             @Override
             public String[] getFields(AliveOrganism aliveOrganism) {
                 String[] fields={"","",""};
@@ -46,7 +46,7 @@ public class Factory {
             }
         });
 
-        factoryFieldsMap.put("Chanterelle", new AliveOrganismFields() {
+        factoryFieldsMap.put("organisms.Chanterelle", new AliveOrganismFields() {
             @Override
             public String[] getFields(AliveOrganism aliveOrganism) {
                 String[] fields={"","","",""};
@@ -59,7 +59,7 @@ public class Factory {
             }
         });
 
-        factoryFieldsMap.put("Moss", new AliveOrganismFields() {
+        factoryFieldsMap.put("organisms.Moss", new AliveOrganismFields() {
             @Override
             public String[] getFields(AliveOrganism aliveOrganism) {
                 String[] fields={"","","","",""};
@@ -72,7 +72,7 @@ public class Factory {
             }
         });
 
-        factoryFieldsMap.put("Rose", new AliveOrganismFields() {
+        factoryFieldsMap.put("organisms.Rose", new AliveOrganismFields() {
             @Override
             public String[] getFields(AliveOrganism aliveOrganism) {
                 String[] fields={"","","",""};
@@ -85,7 +85,7 @@ public class Factory {
             }
         });
 
-        factoryFieldsMap.put("Fish", new AliveOrganismFields() {
+        factoryFieldsMap.put("organisms.Fish", new AliveOrganismFields() {
             @Override
             public String[] getFields(AliveOrganism aliveOrganism) {
                 String[] fields={"","",""};
@@ -97,41 +97,46 @@ public class Factory {
             }
         });
 
-        factoryCreatorMap.put("Amanita", new AliveOrganismCreator() {
+        factoryCreatorMap.put("organisms.Amanita", new AliveOrganismCreator() {
                     @Override
                     public AliveOrganism CreateOrganism(int[] numbers) {
                         return new Amanita(numbers[0], String.valueOf(numbers[1]),  numbers[2], numbers[3]);
                     }
                 });
-        factoryCreatorMap.put("Cat", new AliveOrganismCreator() {
+        factoryCreatorMap.put("organisms.Cat", new AliveOrganismCreator() {
             @Override
             public AliveOrganism CreateOrganism(int[] numbers) {
                 return new Cat(numbers[0],String.valueOf(numbers[1]),numbers[2]);
             }
         });
-        factoryCreatorMap.put("Chanterelle", new AliveOrganismCreator() {
+        factoryCreatorMap.put("organisms.Chanterelle", new AliveOrganismCreator() {
             @Override
             public AliveOrganism CreateOrganism(int[] numbers) {
                 return new Chanterelle(numbers[0],String.valueOf(numbers[1]),numbers[2],numbers[3]);
             }
         });
-        factoryCreatorMap.put("Fish", new AliveOrganismCreator() {
+        factoryCreatorMap.put("organisms.Fish", new AliveOrganismCreator() {
             @Override
             public AliveOrganism CreateOrganism(int[] numbers) {
                 return new Fish(numbers[0],String.valueOf(numbers[1]),numbers[2]);
             }
         });
-        factoryCreatorMap.put("Moss", new AliveOrganismCreator() {
+        factoryCreatorMap.put("organisms.Moss", new AliveOrganismCreator() {
             @Override
             public AliveOrganism CreateOrganism(int[] numbers) {
                 return new Moss(numbers[0],String.valueOf(numbers[1]),numbers[2],String.valueOf(numbers[3]));
             }
         });
-        factoryCreatorMap.put("Rose", new AliveOrganismCreator() {
+        factoryCreatorMap.put("organisms.Rose", new AliveOrganismCreator() {
             @Override
             public AliveOrganism CreateOrganism(int[] numbers) {
                 return new Rose(numbers[0],String.valueOf(numbers[1]),numbers[2],numbers[3]);
             }
         });
+        }
+
+        public void addNewAnimal(String string,AliveOrganismCreator aliveOrganismCreator,AliveOrganismFields aliveOrganismFields){
+            factoryCreatorMap.put(string,aliveOrganismCreator);
+            factoryFieldsMap.put(string,aliveOrganismFields);
         }
     }

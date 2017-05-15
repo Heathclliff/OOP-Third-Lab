@@ -1,4 +1,6 @@
 import Pluginloader.ModuleEngine;
+import Pluginloader.ModuleLoader;
+import Pluginloader.PluginInterface;
 import factory.AliveOrganismCreator;
 import factory.Factory;
 import organisms.AliveOrganism;
@@ -8,32 +10,31 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * Created by Валерий on 07.04.2017.
  */
 public class MainWork {
 
-    private  static CreatePanel createPanel;
-    private  static AliveOrganismCreator aliveOrganismCreator;
-    private  static Factory factory;
+    private   CreatePanel createPanel;
+    private   AliveOrganismCreator aliveOrganismCreator;
+    private   Factory factory;
 
-    private static Vector<String> vector;
-    private static JList<String> list;
+    private  Vector<String> vector;
+    private  JList<String> list;
 
-    private  static  JFrame jFrame;
-    private static java.util.List<AliveOrganism> aliveOrganismsList = new ArrayList<>();
+    private    JFrame jFrame;
+    private  java.util.List<AliveOrganism> aliveOrganismsList = new ArrayList<>();
 
-    public static void serialize(){
-        Serializer serializer = new Serializer(aliveOrganismsList);
+    public  void serialize(ModuleLoader moduleLoader){
+        Serializer serializer = new Serializer(aliveOrganismsList,moduleLoader);
         serializer.serialize();
         serializer=null;
     }
 
-    public static void deserialize(){
-        Serializer serializer = new Serializer(aliveOrganismsList);
+    public  void deserialize(ModuleLoader moduleLoader){
+        Serializer serializer = new Serializer(aliveOrganismsList,moduleLoader);
         serializer.deserialize();
         aliveOrganismsList=serializer.getAliveOrganismsList();
         serializer=null;
@@ -45,7 +46,7 @@ public class MainWork {
         reloadList();
     }
 
-    public static void initializeInterface(){
+    public  void initializeInterface(){
         jFrame = new JFrame("Основное окно");
         jFrame.setSize(700,300);
         jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
@@ -71,18 +72,23 @@ public class MainWork {
         box.add(serial);
         box.add(deserial);
 
-       /* UploadPlugin uploadPlugin = new UploadPlugin();
-        uploadPlugin.downloadPlugin();*/
-
+        factory = new Factory();
+        java.util.List<PluginInterface> pluginInterfaceList = new ArrayList();
+        ModuleLoader loader = new ModuleLoader("plugins", ClassLoader.getSystemClassLoader());
        ModuleEngine moduleEngine = new ModuleEngine();
-       moduleEngine.work();
+       pluginInterfaceList=moduleEngine.work(loader);
+        String[] fields={"0","0","0","0","0"};
+       workWithInterfaseList(pluginInterfaceList,box,fields);
+
 
         serial.addActionListener( (ActionEvent e) -> {
-            serialize();
+            serialize(loader);
         });
         deserial.addActionListener( (ActionEvent e) -> {
-            deserialize();
+            deserialize(loader);
         });
+
+
 
         jFrame.add(box,BorderLayout.NORTH);
 
@@ -95,9 +101,9 @@ public class MainWork {
 
         jFrame.add(list,BorderLayout.SOUTH);
 
-        factory = new Factory();
 
-        String[] fields={"0","0","0","0","0"};
+
+
 
         workWithButtons(amanita,4,fields,"продолжительность жизни","дата рождения","отравлен?","длина юбки");
         workWithButtons(cat,3,fields,"продолжительность жизни","дата рождения","млекопитающее?");
@@ -107,9 +113,17 @@ public class MainWork {
         workWithButtons(rose,4,fields,"продолжительность жизни","дата рождения","паразит?","количество шипов");
     }
 
+    public void workWithInterfaseList(java.util.List<PluginInterface> pluginInterfaceList,Box box,String[] fields){
+        for (PluginInterface pluginInterface: pluginInterfaceList) {
+            factory.addNewAnimal(pluginInterface.getName(),pluginInterface.getCreator(),pluginInterface.getFields());
+            JButton plgbtn = new JButton(pluginInterface.getName());
+            workWithButtons(plgbtn,pluginInterface.getTextFields().length,fields,pluginInterface.getTextFields());
+            box.add(plgbtn);
+        }
+    }
 
 
-    public static void workWithButtons(JButton jButton, int count,String[] field, String... strings){
+    public  void workWithButtons(JButton jButton, int count,String[] field, String... strings){
         jButton.addActionListener((ActionEvent e) -> {
             if (createPanel !=null){
                 jFrame.remove(createPanel);
@@ -131,7 +145,7 @@ public class MainWork {
         });
     }
 
-    private static void reloadList() {
+    private  void reloadList() {
         list=null;
         list = new JList<String>(vector);
         selectionlist();
@@ -151,12 +165,12 @@ public class MainWork {
         }
     }
 
-    public static void repainting() {
+    public  void repainting() {
         jFrame.revalidate();
         jFrame.repaint();
     }
 
-    public static void selectionlist(){
+    public  void selectionlist(){
         list.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -171,12 +185,12 @@ public class MainWork {
         });
     }
 
-    private static String[] getFieldsFromList(int index) {
+    private  String[] getFieldsFromList(int index) {
         String[] fields=factory.getFactoryFields(getClassNameOfItem(index),aliveOrganismsList.get(index));
         return fields;
     }
 
-    public static void deleteBtnListener(int index){
+    public  void deleteBtnListener(int index){
         JButton deletebtn = new JButton("Delete");
         jFrame.add(deletebtn,BorderLayout.LINE_END);
         deletebtn.addActionListener((ActionEvent e) -> {
@@ -186,10 +200,10 @@ public class MainWork {
             });
     }
 
-    public static String getClassNameOfItem(int index){
+    public  String getClassNameOfItem(int index){
         String className;
         className=aliveOrganismsList.get(index).getClass().toString();
-        int posDot=className.indexOf(".");
+        int posDot=className.indexOf(" ");
         className=className.substring(posDot+1,className.length());
         return className;
     }

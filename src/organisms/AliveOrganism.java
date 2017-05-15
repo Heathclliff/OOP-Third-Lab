@@ -42,6 +42,6 @@ public abstract class AliveOrganism {
         System.out.println("I'm growing");
     }
 
-    public abstract String[] getTextFields();
+    public abstract  String[] getTextFields();
 
 }

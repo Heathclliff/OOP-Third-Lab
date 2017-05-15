@@ -11,7 +11,7 @@ public class ModuleLoader extends ClassLoader {
 
     private String pathtobin;
 
-    ModuleLoader(String pathtobin, ClassLoader parent) {
+    public ModuleLoader(String pathtobin, ClassLoader parent) {
         super(parent);
         this.pathtobin = pathtobin;
     }
