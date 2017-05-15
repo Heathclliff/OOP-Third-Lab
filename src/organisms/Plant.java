@@ -4,10 +4,12 @@ package organisms;
  * Created by Валерий on 07.04.2017.
  */
 public abstract class Plant extends  AliveOrganism {
-    public Plant(int lifeExpectancy, String dateOfBirds,int countOfFields, int isParasite) {
-        super(lifeExpectancy, dateOfBirds,countOfFields);
+    public Plant(int lifeExpectancy, String dateOfBirds, int isParasite) {
+        super(lifeExpectancy, dateOfBirds);
         this.setParasite(isParasite);
     }
+
+    private  int countOfFields=3;
 
     private int isParasite;
 

@@ -4,10 +4,12 @@ package organisms;
  * Created by Валерий on 07.04.2017.
  */
 public class Amanita extends Mushroom {
-    public Amanita(int lifeExpectancy, String dateOfBirds,int countOfFields,int isPoisonous, int lengthOfSkirt) {
-        super(lifeExpectancy, dateOfBirds,countOfFields, isPoisonous);
+    public Amanita(int lifeExpectancy, String dateOfBirds,int isPoisonous, int lengthOfSkirt) {
+        super(lifeExpectancy, dateOfBirds, isPoisonous);
         this.setLengthOfSkirt(lengthOfSkirt);
     }
+
+    private  int countOfFields=4;
 
     private int lengthOfSkirt;
 

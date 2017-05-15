@@ -100,37 +100,37 @@ public class Factory {
         factoryCreatorMap.put("Amanita", new AliveOrganismCreator() {
                     @Override
                     public AliveOrganism CreateOrganism(int[] numbers) {
-                        return new Amanita(numbers[0], String.valueOf(numbers[1]), 4, numbers[2], numbers[3]);
+                        return new Amanita(numbers[0], String.valueOf(numbers[1]),  numbers[2], numbers[3]);
                     }
                 });
         factoryCreatorMap.put("Cat", new AliveOrganismCreator() {
             @Override
             public AliveOrganism CreateOrganism(int[] numbers) {
-                return new Cat(numbers[0],String.valueOf(numbers[1]),3,numbers[2]);
+                return new Cat(numbers[0],String.valueOf(numbers[1]),numbers[2]);
             }
         });
         factoryCreatorMap.put("Chanterelle", new AliveOrganismCreator() {
             @Override
             public AliveOrganism CreateOrganism(int[] numbers) {
-                return new Chanterelle(numbers[0],String.valueOf(numbers[1]),4,numbers[2],numbers[3]);
+                return new Chanterelle(numbers[0],String.valueOf(numbers[1]),numbers[2],numbers[3]);
             }
         });
         factoryCreatorMap.put("Fish", new AliveOrganismCreator() {
             @Override
             public AliveOrganism CreateOrganism(int[] numbers) {
-                return new Fish(numbers[0],String.valueOf(numbers[1]),4,numbers[2]);
+                return new Fish(numbers[0],String.valueOf(numbers[1]),numbers[2]);
             }
         });
         factoryCreatorMap.put("Moss", new AliveOrganismCreator() {
             @Override
             public AliveOrganism CreateOrganism(int[] numbers) {
-                return new Moss(numbers[0],String.valueOf(numbers[1]),4,numbers[2],String.valueOf(numbers[3]));
+                return new Moss(numbers[0],String.valueOf(numbers[1]),numbers[2],String.valueOf(numbers[3]));
             }
         });
         factoryCreatorMap.put("Rose", new AliveOrganismCreator() {
             @Override
             public AliveOrganism CreateOrganism(int[] numbers) {
-                return new Rose(numbers[0],String.valueOf(numbers[1]),4,numbers[2],numbers[3]);
+                return new Rose(numbers[0],String.valueOf(numbers[1]),numbers[2],numbers[3]);
             }
         });
         }

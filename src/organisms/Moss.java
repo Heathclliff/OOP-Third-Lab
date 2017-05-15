@@ -4,10 +4,12 @@ package organisms;
  * Created by Валерий on 07.04.2017.
  */
 public class Moss extends Plant {
-    public Moss(int lifeExpectancy, String dateOfBirds,int countOfFields, int isParasite, String master) {
-        super(lifeExpectancy, dateOfBirds,countOfFields, isParasite);
+    public Moss(int lifeExpectancy, String dateOfBirds, int isParasite, String master) {
+        super(lifeExpectancy, dateOfBirds, isParasite);
         this.setMaster(master);
     }
+
+    private  int countOfFields=4;
 
     private String master;
 

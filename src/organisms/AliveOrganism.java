@@ -7,7 +7,7 @@ public abstract class AliveOrganism {
 
     private int lifeExpectancy;
     private String dateOfBirds;
-    private  int countOfFields;
+    private  int countOfFields=3;
 
     public int getCountOfFields() {
         return countOfFields;
@@ -17,10 +17,9 @@ public abstract class AliveOrganism {
         this.countOfFields = countOfFields;
     }
 
-    public AliveOrganism(int lifeExpectancy, String dateOfBirds,int countOfFields) {
+    public AliveOrganism(int lifeExpectancy, String dateOfBirds) {
         this.setLifeExpectancy(lifeExpectancy);
         this.setDateOfBirds(dateOfBirds);
-        this.setCountOfFields(countOfFields);
     }
 
     public int getLifeExpectancy() {

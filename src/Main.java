@@ -5,6 +5,5 @@ public class Main {
     public static void main(String[] args) {
         MainWork mainWork = new MainWork();
         MainWork.initializeInterface();
-        //System.out.println(mainWork.getFileName());
     }
 }

@@ -5,10 +5,12 @@ package organisms;
  */
 public abstract class Animal extends AliveOrganism {
 
-    public Animal(int lifeExpectancy, String dateOfBirds,int countOfFields, int isMammal) {
-        super(lifeExpectancy, dateOfBirds,countOfFields);
+    public Animal(int lifeExpectancy, String dateOfBirds, int isMammal) {
+        super(lifeExpectancy, dateOfBirds);
         this.setMammal(isMammal);
     }
+
+    private  int countOfFields=4;
 
     private  int isMammal;
 

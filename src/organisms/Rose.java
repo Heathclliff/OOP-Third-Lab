@@ -5,10 +5,12 @@ package organisms;
  */
 public class Rose extends Plant {
 
-    public Rose(int lifeExpectancy, String dateOfBirds,int countOfFileds, int isParasite, int numberOfSpikes) {
-        super(lifeExpectancy, dateOfBirds,countOfFileds, isParasite);
+    public Rose(int lifeExpectancy, String dateOfBirds, int isParasite, int numberOfSpikes) {
+        super(lifeExpectancy, dateOfBirds, isParasite);
         this.setNumberOfSpikes(numberOfSpikes);
     }
+
+    private  int countOfFields=4;
 
     private int numberOfSpikes;
 
