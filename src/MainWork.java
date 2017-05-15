@@ -1,6 +1,8 @@
 import Pluginloader.ModuleEngine;
 import Pluginloader.ModuleLoader;
 import Pluginloader.PluginInterface;
+import Serialize.SerializePlugin;
+import Serialize.Serializer;
 import factory.AliveOrganismCreator;
 import factory.Factory;
 import organisms.AliveOrganism;
@@ -27,14 +29,14 @@ public class MainWork {
     private    JFrame jFrame;
     private  java.util.List<AliveOrganism> aliveOrganismsList = new ArrayList<>();
 
-    public  void serialize(ModuleLoader moduleLoader){
-        Serializer serializer = new Serializer(aliveOrganismsList,moduleLoader);
+    public  void serialize(ModuleLoader moduleLoader,java.util.List<SerializePlugin> pluginSerializer){
+        Serializer serializer = new Serializer(aliveOrganismsList,moduleLoader,pluginSerializer);
         serializer.serialize();
         serializer=null;
     }
 
-    public  void deserialize(ModuleLoader moduleLoader){
-        Serializer serializer = new Serializer(aliveOrganismsList,moduleLoader);
+    public  void deserialize(ModuleLoader moduleLoader,java.util.List<SerializePlugin> pluginSerializer){
+        Serializer serializer = new Serializer(aliveOrganismsList,moduleLoader,pluginSerializer);
         serializer.deserialize();
         aliveOrganismsList=serializer.getAliveOrganismsList();
         serializer=null;
@@ -74,18 +76,26 @@ public class MainWork {
 
         factory = new Factory();
         java.util.List<PluginInterface> pluginInterfaceList = new ArrayList();
+        java.util.List<SerializePlugin> pluginSerializer = new ArrayList();
+
         ModuleLoader loader = new ModuleLoader("plugins", ClassLoader.getSystemClassLoader());
        ModuleEngine moduleEngine = new ModuleEngine();
-       pluginInterfaceList=moduleEngine.work(loader);
-        String[] fields={"0","0","0","0","0"};
+        moduleEngine.work(loader);
+       pluginInterfaceList=moduleEngine.getPluginInterfaces();
+       pluginSerializer=moduleEngine.getPluginSerializes();
+
+
+       String[] fields={"0","0","0","0","0"};
        workWithInterfaseList(pluginInterfaceList,box,fields);
 
 
+        java.util.List<SerializePlugin> finalPluginSerializer = pluginSerializer;
+
         serial.addActionListener( (ActionEvent e) -> {
-            serialize(loader);
+            serialize(loader, finalPluginSerializer);
         });
         deserial.addActionListener( (ActionEvent e) -> {
-            deserialize(loader);
+            deserialize(loader, finalPluginSerializer);
         });
 
 

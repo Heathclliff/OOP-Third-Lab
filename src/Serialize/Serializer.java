@@ -1,12 +1,12 @@
+package Serialize;
+
 import Pluginloader.ModuleLoader;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import organisms.AliveOrganism;
 
 import javax.swing.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +16,7 @@ import java.util.List;
 public class Serializer {
 
     private java.util.List<AliveOrganism> aliveOrganismsList = new ArrayList<>();
+    private List<SerializePlugin> serializePlugins = new ArrayList<>();
     private  ModuleLoader moduleLoader;
 
     public List<AliveOrganism> getAliveOrganismsList() {
@@ -26,9 +27,10 @@ public class Serializer {
         this.aliveOrganismsList = aliveOrganismsList;
     }
 
-    public Serializer(java.util.List<AliveOrganism> aliveOrganismsList,ModuleLoader moduleLoader) {
+    public Serializer(java.util.List<AliveOrganism> aliveOrganismsList,ModuleLoader moduleLoader,List<SerializePlugin> serializePlugins) {
         this.setAliveOrganismsList(aliveOrganismsList);
         this.moduleLoader=moduleLoader;
+        this.serializePlugins=serializePlugins;
 
     }
 
@@ -39,7 +41,11 @@ public class Serializer {
         xStream.setClassLoader(moduleLoader);
         try {
             FileOutputStream fs = new FileOutputStream(fileName);
-            xStream.toXML(this.getAliveOrganismsList(), fs);
+            OutputStream outputStream = fs;
+            for (SerializePlugin serPlug:serializePlugins) {
+                outputStream=serPlug.getOutputStream(outputStream);
+            }
+            xStream.toXML(this.getAliveOrganismsList(), outputStream);
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         }
@@ -64,7 +70,11 @@ public class Serializer {
         this.setAliveOrganismsList(new ArrayList<>());
         try {
             FileInputStream fis = new FileInputStream(fileName);
-            this.setAliveOrganismsList((ArrayList) xStream.fromXML(fis, this.getAliveOrganismsList()));
+            InputStream inputStream = fis;
+            for (SerializePlugin serPlug:serializePlugins) {
+                inputStream=serPlug.getInputStream(inputStream);
+            }
+            this.setAliveOrganismsList((ArrayList) xStream.fromXML(inputStream, this.getAliveOrganismsList()));
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         }
