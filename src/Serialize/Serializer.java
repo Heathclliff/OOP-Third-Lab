@@ -46,7 +46,8 @@ public class Serializer {
                 outputStream=serPlug.getOutputStream(outputStream);
             }
             xStream.toXML(this.getAliveOrganismsList(), outputStream);
-        } catch (FileNotFoundException e1) {
+            fs.close();
+        } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
@@ -75,10 +76,12 @@ public class Serializer {
                 inputStream=serPlug.getInputStream(inputStream);
             }
             this.setAliveOrganismsList((ArrayList) xStream.fromXML(inputStream, this.getAliveOrganismsList()));
-        } catch (FileNotFoundException e1) {
+            fis.close();
+        } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
+
 }
 
 

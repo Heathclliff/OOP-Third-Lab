@@ -12,12 +12,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Created by Валерий on 07.04.2017.
  */
-public class MainWork {
+class MainWork {
 
     private   CreatePanel createPanel;
     private   AliveOrganismCreator aliveOrganismCreator;
@@ -29,13 +30,13 @@ public class MainWork {
     private    JFrame jFrame;
     private  java.util.List<AliveOrganism> aliveOrganismsList = new ArrayList<>();
 
-    public  void serialize(ModuleLoader moduleLoader,java.util.List<SerializePlugin> pluginSerializer){
+    private void serialize(ModuleLoader moduleLoader, java.util.List<SerializePlugin> pluginSerializer){
         Serializer serializer = new Serializer(aliveOrganismsList,moduleLoader,pluginSerializer);
         serializer.serialize();
         serializer=null;
     }
 
-    public  void deserialize(ModuleLoader moduleLoader,java.util.List<SerializePlugin> pluginSerializer){
+    private void deserialize(ModuleLoader moduleLoader, java.util.List<SerializePlugin> pluginSerializer){
         Serializer serializer = new Serializer(aliveOrganismsList,moduleLoader,pluginSerializer);
         serializer.deserialize();
         aliveOrganismsList=serializer.getAliveOrganismsList();
@@ -48,21 +49,21 @@ public class MainWork {
         reloadList();
     }
 
-    public  void initializeInterface(){
+    void initializeInterface(){
         jFrame = new JFrame("Основное окно");
-        jFrame.setSize(700,300);
+        jFrame.setSize(1070,300);
         jFrame.setDefaultCloseOperation(jFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setBackground(Color.red);
         jFrame.setVisible(true);
 
         Box box = Box.createHorizontalBox();
-        JButton amanita = new JButton("Amanita");
-        JButton cat = new JButton("Cat");
-        JButton chanterelle = new JButton("Chanterelle");
-        JButton fish = new JButton("Fish");
-        JButton moss = new JButton("Moss");
-        JButton rose = new JButton("Rose");
+        JButton amanita = new JButton("organisms.Amanita");
+        JButton cat = new JButton("organisms.Cat");
+        JButton chanterelle = new JButton("organisms.Chanterelle");
+        JButton fish = new JButton("organisms.Fish");
+        JButton moss = new JButton("organisms.Moss");
+        JButton rose = new JButton("organisms.Rose");
         JButton serial = new JButton("Serialize");
         JButton deserial = new JButton("Deserialize");
         box.add(amanita);
@@ -98,8 +99,6 @@ public class MainWork {
             deserialize(loader, finalPluginSerializer);
         });
 
-
-
         jFrame.add(box,BorderLayout.NORTH);
 
         repainting();
@@ -123,7 +122,7 @@ public class MainWork {
         workWithButtons(rose,4,fields,"продолжительность жизни","дата рождения","паразит?","количество шипов");
     }
 
-    public void workWithInterfaseList(java.util.List<PluginInterface> pluginInterfaceList,Box box,String[] fields){
+    private void workWithInterfaseList(java.util.List<PluginInterface> pluginInterfaceList, Box box, String[] fields){
         for (PluginInterface pluginInterface: pluginInterfaceList) {
             factory.addNewAnimal(pluginInterface.getName(),pluginInterface.getCreator(),pluginInterface.getFields());
             JButton plgbtn = new JButton(pluginInterface.getName());
@@ -133,7 +132,7 @@ public class MainWork {
     }
 
 
-    public  void workWithButtons(JButton jButton, int count,String[] field, String... strings){
+    private void workWithButtons(JButton jButton, int count, String[] field, String... strings){
         jButton.addActionListener((ActionEvent e) -> {
             if (createPanel !=null){
                 jFrame.remove(createPanel);
@@ -163,7 +162,7 @@ public class MainWork {
         repainting();
     }
 
-    public static boolean checkAllFields(CreatePanel createPanel) {
+    private static boolean checkAllFields(CreatePanel createPanel) {
         if (createPanel.checkFields()) {
             return true;
         } else {
@@ -175,12 +174,12 @@ public class MainWork {
         }
     }
 
-    public  void repainting() {
+    private void repainting() {
         jFrame.revalidate();
         jFrame.repaint();
     }
 
-    public  void selectionlist(){
+    private void selectionlist(){
         list.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -200,7 +199,7 @@ public class MainWork {
         return fields;
     }
 
-    public  void deleteBtnListener(int index){
+    private void deleteBtnListener(int index){
         JButton deletebtn = new JButton("Delete");
         jFrame.add(deletebtn,BorderLayout.LINE_END);
         deletebtn.addActionListener((ActionEvent e) -> {
@@ -210,11 +209,12 @@ public class MainWork {
             });
     }
 
-    public  String getClassNameOfItem(int index){
+    private String getClassNameOfItem(int index){
         String className;
         className=aliveOrganismsList.get(index).getClass().toString();
         int posDot=className.indexOf(" ");
         className=className.substring(posDot+1,className.length());
+        System.out.println(className);
         return className;
     }
 }
