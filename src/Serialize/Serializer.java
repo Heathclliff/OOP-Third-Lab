@@ -3,31 +3,32 @@ package Serialize;
 import Pluginloader.ModuleLoader;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import decorator.DecoratorOrganism;
 import organisms.AliveOrganism;
 
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 /**
  * Created by Валерий on 26.04.2017.
  */
 public class Serializer {
 
-    private java.util.List<AliveOrganism> aliveOrganismsList = new ArrayList<>();
+    private java.util.List<DecoratorOrganism> aliveOrganismsList = new ArrayList<>();
     private List<SerializePlugin> serializePlugins = new ArrayList<>();
     private  ModuleLoader moduleLoader;
 
-    public List<AliveOrganism> getAliveOrganismsList() {
+    public List<DecoratorOrganism> getAliveOrganismsList() {
         return aliveOrganismsList;
     }
 
-    private void setAliveOrganismsList(List<AliveOrganism> aliveOrganismsList) {
+    private void setAliveOrganismsList(List<DecoratorOrganism> aliveOrganismsList) {
         this.aliveOrganismsList = aliveOrganismsList;
     }
 
-    public Serializer(java.util.List<AliveOrganism> aliveOrganismsList,ModuleLoader moduleLoader,List<SerializePlugin> serializePlugins) {
+    public Serializer(java.util.List<DecoratorOrganism> aliveOrganismsList, ModuleLoader moduleLoader, List<SerializePlugin> serializePlugins) {
         this.setAliveOrganismsList(aliveOrganismsList);
         this.moduleLoader=moduleLoader;
         this.serializePlugins=serializePlugins;
@@ -45,10 +46,10 @@ public class Serializer {
             for (SerializePlugin serPlug:serializePlugins) {
                 outputStream=serPlug.getOutputStream(outputStream);
             }
-            xStream.toXML(this.getAliveOrganismsList(), outputStream);
-            fs.close();
+            xStream.toXML(this.getAliveOrganismsList().stream().map(DecoratorOrganism::getAliveOrganism).collect(Collectors.toList()), outputStream);
+            outputStream.close();
         } catch (IOException e1) {
-            e1.printStackTrace();
+
         }
     }
 
@@ -75,10 +76,10 @@ public class Serializer {
             for (SerializePlugin serPlug:serializePlugins) {
                 inputStream=serPlug.getInputStream(inputStream);
             }
-            this.setAliveOrganismsList((ArrayList) xStream.fromXML(inputStream, this.getAliveOrganismsList()));
-            fis.close();
+            this.setAliveOrganismsList(((ArrayList<AliveOrganism>) xStream.fromXML(inputStream, this.getAliveOrganismsList())).stream().map(o -> new DecoratorOrganism(o)).collect(Collectors.toList()));
+            inputStream.close();
         } catch (IOException e1) {
-            e1.printStackTrace();
+
         }
     }
 

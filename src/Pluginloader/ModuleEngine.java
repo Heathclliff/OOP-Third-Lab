@@ -3,12 +3,9 @@ package Pluginloader; /**
  */
 
 import Serialize.SerializePlugin;
-import factory.AliveOrganismCreator;
-import factory.AliveOrganismFields;
 
 import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,73 +25,24 @@ public class ModuleEngine {
 
     public void work(ModuleLoader moduleLoader) {
 
-        File dir = new File("plugins");
-        String[] modules = dir.list();
+        File pluginDir = new File("plugins");
 
-        PluginInterface pluginInterface = new PluginInterface() {
-            @Override
-            public String getName() {
-                return null;
+        File[] jars = pluginDir.listFiles(new FileFilter() {
+            public boolean accept(File file) {
+                return file.isFile() && file.getName().endsWith(".jar");
             }
+        });
 
-            @Override
-            public AliveOrganismCreator getCreator() {
-                return null;
-            }
-
-            @Override
-            public AliveOrganismFields getFields() {
-                return null;
-            }
-
-            @Override
-            public String[] getTextFields() {
-                return new String[0];
-            }
-        };
-        SerializePlugin serializePlugin = new SerializePlugin() {
-            @Override
-            public InputStream getInputStream(InputStream stream) {
-                return null;
-            }
-
-            @Override
-            public OutputStream getOutputStream(OutputStream stream) {
-                return null;
-            }
-        };
-
-        for (String module: modules) {
+        for (File file : jars) {
             try {
-                String moduleName = module.split(".class")[0];
-                Class clazz = moduleLoader.loadClass(moduleName);
-
-                Class[] arrayinterfaces = clazz.getInterfaces();
-
-                boolean isMainClassPlugin = false;
-                boolean isSerializer = false;
-
-                for (Class classInterface: arrayinterfaces) {
-                    isMainClassPlugin = classInterface.isInstance(pluginInterface);
-                    isSerializer = classInterface.isInstance(serializePlugin);
-                    if(isMainClassPlugin||isSerializer){
-                        break;
-                    }
+                PluginInfo newplagin = new PluginInfo(file,moduleLoader);
+                if(newplagin.getTypeInterface().equals("Organism")){
+                    this.pluginInterfaces.add((PluginInterface) newplagin.getPluginInstance());
                 }
-
-                if (isMainClassPlugin){
-                    this.pluginInterfaces.add((PluginInterface) clazz.newInstance());
+                else if(newplagin.getTypeInterface().equals("Serializator")){
+                    this.pluginSerializes.add((SerializePlugin) newplagin.getPluginInstance());
                 }
-
-                if(isSerializer){
-                    this.pluginSerializes.add((SerializePlugin) clazz.newInstance());
-                }
-
-
-
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException e) {
-                e.printStackTrace();
-            }
+            } catch (Exception e) {}
         }
     }
 }
